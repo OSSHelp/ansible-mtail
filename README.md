@@ -6,7 +6,7 @@ Ansible role that installs and configures mtail-exporter.
 
 ## Usage (example)
 
-```yaml
+``` yaml
     - role: mtail
       units:
        - name: dpkg
@@ -36,36 +36,36 @@ Ansible role that installs and configures mtail-exporter.
 
 ## Available parameters
 
-### Global settings and deffaults
+### Global settings and defaults
 
 | Param | Default | Description |
 | -----------| ----------- | ----------- |
-| `mtail_setup`| `full` | Setup mode. [See OSSHelp KB article](https://oss.help/kb4895). |
-| `mtail_exporter_version`| `v3.0.0-rc38` | Version used. Еhe full list can be found on [github page](https://github.com/google/mtail/releases). |
+| `mtail_setup` | `full` | Setup mode. [See OSSHelp KB article](https://oss.help/kb4895). |
+| `mtail_exporter_version` | `v3.0.0-rc38` | Version used. Еhe full list can be found on [github page](https://github.com/google/mtail/releases). |
 
 ### Available units parameters
 
-Short description here.
-
 | Param | Description |
 | ------| ----------- |
-| `name`| Name of custom units and config file. |
-| `target_log`| The log that the utility parses.  |
-| `port`| Listening port. |
-| `parsing_params`| Parameters of parsing. |
+| `name` | Name of custom units and config file. |
+| `target_log` | The log that the utility parses.  |
+| `port` | Listening port. |
+| `parsing_params` | Parameters of parsing. |
 
 ### Available counts_type parameters
 
 | Param | Description |
 | ------| ----------- |
-| `help`| Description. |
-| `counter`| Metric counter. |
-| `regular`| Regular expression. |
-| `act`| Action on regex match. |
+| `help` | Description. |
+| `counter` | Metric counter. |
+| `regular` | Regular expression. |
+| `act` | Action on regex match. |
 
 ## FAQ
 
-Аor parsing several logs at once, a separate instance of a systemd unit with a separate config is created.
+### Multilog parsing
+
+For parsing several logs at once, a separate instance of a systemd unit with a separate config is created.
 
 ## Useful links
 

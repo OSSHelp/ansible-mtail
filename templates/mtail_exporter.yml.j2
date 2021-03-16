@@ -1,0 +1,11 @@
+{% for entry in unit.parsing_params %}
+# {{ entry.help }}
+counter {{ entry.counter }}
+{% endfor %}
+
+
+{% for entry in unit.parsing_params %}
+{{ entry.regular }} {
+  {{ entry.act }}
+}
+{% endfor %}

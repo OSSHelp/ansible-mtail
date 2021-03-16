@@ -1,0 +1,6 @@
+---
+- name: restart mtail services
+  include_tasks: handlers/restart.yml
+  vars:
+    unit: "{{ item }}"
+  loop: "{{ units|default('[]') }}"

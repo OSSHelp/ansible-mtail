@@ -1,0 +1,27 @@
+---
+
+- name: create {{ unit.name }}.mtail config
+  template:
+    src: mtail_exporter.yml.j2
+    dest: "{{ mtail_exporter_dirs.config_dir }}/{{ unit.name }}.mtail"
+    owner: root
+    group: "{{ mtail_exporter_user_name }}"
+    mode: 0640
+  notify: restart mtail services
+
+- name: create {{ unit.name }} systemd unit
+  template:
+    src: mtail_exporter.service.j2
+    dest: "/etc/systemd/system/{{ unit.name }}_mtail_exporter.service"
+  notify: restart mtail services
+
+- name: Force systemd to reread configs
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  notify: restart mtail services
+
+- name: enable {{ unit.name }}.service
+  systemd:
+    name: "{{ unit.name }}_mtail_exporter.service"
+    enabled: true
+  notify: restart mtail services

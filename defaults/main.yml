@@ -1,0 +1,10 @@
+---
+mtail_setup: full
+mtail_exporter_version: "v3.0.0-rc38"
+mtail_exporter_targz_url: "https://github.com/google/mtail/releases/download/{{ mtail_exporter_version }}/mtail_{{ mtail_exporter_version }}_linux_amd64"
+
+mtail_exporter_user_name: mtail_exporter
+
+mtail_exporter_dirs:
+  binary_dir: /usr/local/bin
+  config_dir: /usr/local/etc/mtail_exporter

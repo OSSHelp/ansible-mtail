@@ -1,0 +1,5 @@
+---
+- name: restart mtail_exporter services
+  systemd:
+    state: restarted
+    name: '{{ unit.name }}_mtail_exporter.service'

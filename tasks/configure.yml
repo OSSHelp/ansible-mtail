@@ -1,0 +1,6 @@
+---
+- name: setup units and configs
+  include_tasks: units.yml
+  vars:
+    unit: "{{ item }}"
+  loop: "{{ units|default('[]') }}"

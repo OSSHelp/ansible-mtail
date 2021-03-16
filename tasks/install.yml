@@ -1,0 +1,25 @@
+---
+- name: check if binary file exists
+  stat:
+    path: "{{ mtail_exporter_dirs.binary_dir }}/mtail_exporter"
+  register: binary_file
+
+- name: download binary file
+  get_url:
+    url: "{{ mtail_exporter_targz_url }}"
+    dest: "{{ mtail_exporter_dirs.binary_dir }}/mtail_exporter"
+    mode: '0755'
+  when: not binary_file.stat.exists
+
+- name: create config dir
+  file:
+    path: "{{ mtail_exporter_dirs.config_dir }}"
+    state: directory
+
+- name: create user
+  user:
+    name: "{{ mtail_exporter_user_name }}"
+    home: "/nonexistent"
+    create_home: no
+    shell: "/bin/false"
+    system: yes

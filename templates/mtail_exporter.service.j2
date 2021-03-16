@@ -1,0 +1,15 @@
+[Unit]
+Description=mtail_exporter
+[Service]
+Type=simple
+User={{ mtail_exporter_user_name }}
+Group={{ mtail_exporter_user_name }}
+RuntimeDirectory=mtail_exporter
+RuntimeDirectoryMode=0755
+ExecStart=/sbin/start-stop-daemon -Smp /run/mtail_exporter/{{ unit.name }}_mtail_exporter.pid -x {{ mtail_exporter_dirs.binary_dir }}/mtail_exporter -- --progs {{ mtail_exporter_dirs.config_dir }}/{{ unit.name }}.mtail --port {{ unit.port }} --logs {{ unit.target_log }}
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mtail_exporter
+Restart=always
+[Install]
+WantedBy=multi-user.target

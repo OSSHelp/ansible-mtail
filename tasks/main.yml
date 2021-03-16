@@ -1,0 +1,8 @@
+---
+- name: install
+  include_tasks: install.yml
+  when: mtail_setup == "full" or mtail_setup == "install"
+
+- name: configure
+  import_tasks: configure.yml
+  when: mtail_setup == "full" or mtail_setup == "configure"

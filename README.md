@@ -32,6 +32,17 @@ Ansible role that installs and configures mtail-exporter.
               counter: total_cloud
               regular: '/$/'
               act: 'total_cloud++'
+        - name: oom
+          target_log: "/var/log/kern.log"
+          groups: 'adm'
+          port: 3905
+          parsing_params:
+            - kills:
+              help: "OOM kill events in lxc containers"
+              counter: lxc_oom_kills_total
+              counter_by: 'log_file, container_name, service_name'
+              regular: '/.+Task in \/lxc\/(?P<container_name>\w{3,50})\/(?P<service_name>\S+).+killed as a result of limit.+/'
+              act: 'lxc_oom_kills_total[getfilename()][$container_name][$service_name]++'
 ```
 
 ## Available parameters
@@ -50,6 +61,7 @@ Ansible role that installs and configures mtail-exporter.
 | `name` | Name of custom units and config file. |
 | `target_log` | The log that the utility parses.  |
 | `port` | Listening port. |
+| `groups` | Comma-separated list of additional groups, where exporter user needs to be added. |
 | `parsing_params` | Parameters of parsing. |
 
 ### Available counts_type parameters
@@ -58,6 +70,7 @@ Ansible role that installs and configures mtail-exporter.
 | ------| ----------- |
 | `help` | Description. |
 | `counter` | Metric counter. |
+| `counter_by` | List of additional labels. |
 | `regular` | Regular expression. |
 | `act` | Action on regex match. |
 

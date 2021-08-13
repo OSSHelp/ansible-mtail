@@ -1,8 +1,8 @@
 {% for entry in unit.parsing_params %}
 # {{ entry.help }}
-counter {{ entry.counter }}
-{% endfor %}
+counter {{ entry.counter }}{% if entry.counter_by is defined and entry.counter_by|length %} by {{ entry.counter_by }}{% endif %}
 
+{% endfor %}
 
 {% for entry in unit.parsing_params %}
 {{ entry.regular }} {

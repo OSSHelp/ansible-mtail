@@ -15,8 +15,15 @@
     dest: "/etc/systemd/system/{{ unit.name }}_mtail_exporter.service"
   notify: restart mtail services
 
-- name: Force systemd to reread configs
-  ansible.builtin.systemd:
+- name: add user {{ mtail_exporter_user_name }} to needed groups
+  user:
+    name: "{{ mtail_exporter_user_name }}"
+    groups: "{{ unit.groups }}"
+    append: yes
+  when: unit.groups is defined and unit.groups|length > 0
+
+- name: force systemd to reread configs
+  systemd:
     daemon_reload: yes
   notify: restart mtail services
 
